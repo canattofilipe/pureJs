@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body onload="runPipeline()">
+
+  <p id="myElement"></p>
+
+  <script>
+    var l = [10, 20, 30, 40];
+    document.getElementById("myElement").innerHTML = l;
+
+    function runPipeline() {
+
+      setInterval(function () {
+
+        // remove first item
+        l.shift();
+        // add add new item in pipeline
+        l.push(Math.floor((Math.random() * 100) + 1));
+        // update DOM
+        document.getElementById("myElement").innerHTML = l;
+
+      }, 3000);
+
+    }
+  </script>
+
+</body>
+
+</html>
