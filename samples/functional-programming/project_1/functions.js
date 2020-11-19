@@ -1,7 +1,4 @@
-const { rejects } = require("assert");
-const { EROFS } = require("constants");
 const fs = require("fs");
-const { resolve } = require("path");
 const path = require("path");
 
 function readDirectory(dir) {
@@ -30,6 +27,22 @@ function readFiles(paths) {
   return Promise.all(paths.map((path) => readFile(path)));
 }
 
+function removeIfContains(list, value) {
+  return list.filter((el) => !el.includes(value));
+}
+
+function removeIfNumer(list) {
+  return list.filter((el) => {
+    const v = parseInt(el.trim());
+    // JS defines that 'NaN != NaN = true'
+    return v != v;
+  });
+}
+
+function removeEmpty(list) {
+  return list.filter((el) => el.trim());
+}
+
 function filterByExt(files, ext) {
   return files.filter((el) => el.endsWith(ext));
 }
@@ -39,4 +52,7 @@ module.exports = {
   filterByExt,
   readFile,
   readFiles,
+  removeEmpty,
+  removeIfContains,
+  removeIfNumer,
 };
