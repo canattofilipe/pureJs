@@ -27,8 +27,10 @@ function readFiles(paths) {
   return Promise.all(paths.map((path) => readFile(path)));
 }
 
-function removeIfContains(list, value) {
-  return list.filter((el) => !el.includes(value));
+function removeIfContains(symbol) {
+  return function (list) {
+    return list.filter((el) => !el.includes(symbol));
+  };
 }
 
 function removeIfNumer(list) {
@@ -43,8 +45,10 @@ function removeEmpty(list) {
   return list.filter((el) => el.trim());
 }
 
-function filterByExt(files, ext) {
-  return files.filter((el) => el.endsWith(ext));
+function filterByExt(ext) {
+  return function (files) {
+    return files.filter((el) => el.endsWith(ext));
+  };
 }
 
 module.exports = {
