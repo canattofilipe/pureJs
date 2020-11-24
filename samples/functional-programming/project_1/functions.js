@@ -33,6 +33,29 @@ function removeIfContains(symbol) {
   };
 }
 
+function removeSymbols(symbols) {
+  return function (list) {
+    return list.map((el) => {
+      let newText = el;
+      symbols.forEach((symbol) => {
+        newText = newText.split(symbol).join("");
+      });
+      return newText;
+    });
+  };
+}
+
+function groupWords(list) {
+  return Object.values(
+    list.reduce((acc, word) => {
+      const p = word.toLowerCase();
+      const quantity = acc[p] ? acc[p].quantity + 1 : 1;
+      acc[p] = { el: word, quantity };
+      return acc;
+    }, {})
+  );
+}
+
 function removeIfNumer(list) {
   return list.filter((el) => {
     const v = parseInt(el.trim());
@@ -51,6 +74,16 @@ function filterByExt(ext) {
   };
 }
 
+function mergeContent(list) {
+  return list.join(" ");
+}
+
+function separateTextBy(symbol) {
+  return function (text) {
+    return text.split(symbol);
+  };
+}
+
 module.exports = {
   readDirectory,
   filterByExt,
@@ -59,4 +92,8 @@ module.exports = {
   removeEmpty,
   removeIfContains,
   removeIfNumer,
+  removeSymbols,
+  mergeContent,
+  separateTextBy,
+  groupWords,
 };
