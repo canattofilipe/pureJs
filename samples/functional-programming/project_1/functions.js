@@ -35,13 +35,9 @@ function removeIfContains(symbol) {
 
 function removeSymbols(symbols) {
   return function (list) {
-    return list.map((el) => {
-      let newText = el;
-      symbols.forEach((symbol) => {
-        newText = newText.split(symbol).join("");
-      });
-      return newText;
-    });
+    return list.map((el) =>
+      symbols.reduce((acc, symbol) => acc.split(symbol).join(""), el)
+    );
   };
 }
 
