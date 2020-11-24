@@ -84,6 +84,14 @@ function separateTextBy(symbol) {
   };
 }
 
+function sortByNumericAttr(attr, order = "asc") {
+  return function (list) {
+    const desc = (o1, o2) => o1[attr] - o2[attr];
+    const asc = (o1, o2) => o2[attr] - o1[attr];
+    return list.sort(order === "asc" ? asc : desc);
+  };
+}
+
 module.exports = {
   readDirectory,
   filterByExt,
@@ -96,4 +104,5 @@ module.exports = {
   mergeContent,
   separateTextBy,
   groupWords,
+  sortByNumericAttr,
 };

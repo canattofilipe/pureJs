@@ -34,4 +34,5 @@ fn.readDirectory(dir)
   .then(fn.removeEmpty)
   .then(fn.removeIfNumer)
   .then(fn.groupWords)
+  .then(fn.sortByNumericAttr("quantity"))
   .then(console.log);
